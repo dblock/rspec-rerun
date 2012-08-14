@@ -6,46 +6,16 @@ The strategy to rerun failed specs is to output a file called `rspec.failures` t
 Usage
 -----
 
-Add the `FailuresFormatter` to RSpec. One way to do this is to implement an `rspec:run` task in `lib/tasks/rspec.rake`.
+Add `rspec-rerun` to `Gemfile`.
 
 ``` ruby
-RSpec::Core::RakeTask.new("rspec:run") do |t|
-  t.pattern = "spec/**/*_spec.rb"
-  t.verbose = false
-  t.fail_on_error = false
-  t.spec_opts = [
-    "--format", "RSpec::Rerun::Formatters::FailuresFormatter",
-    File.read(File.join(Rails.root, ".rspec")).split(/\n+/).map { |l| l.shellsplit }
-  ].flatten
-end
+gem "rspec-rerun"
 ```
 
-Add a rerun task.
+Change the default task in `Rakefile`.
 
 ``` ruby
-RSpec::Core::RakeTask.new("rspec:rerun") do |t|
-  t.pattern = "spec/**/*_spec.rb"
-  t.verbose = false
-  t.fail_on_error = false
-  t.spec_opts = [
-    "-O", File.join(Rails.root, 'rspec.failures'),
-    File.read(File.join(Rails.root, '.rspec')).split(/\n+/).map { |l| l.shellsplit }
-  ].flatten
-end
-```
-
-Combine the two tasks.
-
-``` ruby
-task "test" do
-  rspec_failures = File.join(Rails.root, 'rspec.failures')
-  FileUtils.rm_f rspec_failures
-  Rake::Task["rspec:run"].execute
-  unless $?.success?
-    puts "[#{Time.now}] Failed, rerunning #{File.read(rspec_failures).split(/\n+/).count} failure(s) ..."
-    Rake::Task["spec:rerun"].execute
-  end
-end
+task :default => "rspec-rerun:spec"
 ```
 
 History
