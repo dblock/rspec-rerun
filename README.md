@@ -12,11 +12,14 @@ Add `rspec-rerun` to `Gemfile`.
 gem "rspec-rerun"
 ```
 
-Change the default task in `Rakefile`.
+Require `rspec-rerun` and change the default task in `Rakefile`.
 
 ``` ruby
+require 'rspec-rerun'
 task :default => "rspec-rerun:spec"
 ```
+
+It might also be a good idea to add `rspec.failures` to `.gitignore`.
 
 History
 -------
