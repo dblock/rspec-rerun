@@ -31,7 +31,7 @@ describe RSpec::Rerun::Formatters::FailuresFormatter do
     end
   end
 
-  describe 'clean' do
+  describe 'clean!' do
     it "doesn't raise errors when the retry file doesn't exist" do
       lambda { formatter.clean! }.should_not raise_error
     end

@@ -1,6 +1,6 @@
 source "http://rubygems.org"
 
-gem "rspec", ">= 2.0"
+gem "rspec", ">= 2.11.0"
 
 group :development, :test do
   gem "bundler"

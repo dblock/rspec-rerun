@@ -22,9 +22,9 @@ module RSpec
         end
 
         def clean!
-		  if File.exists? FILENAME
-		    File.delete FILENAME
-		  end
+    		  if File.exists? FILENAME
+    		    File.delete FILENAME
+    		  end
         end
 
       end
