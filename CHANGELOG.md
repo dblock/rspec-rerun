@@ -1,3 +1,8 @@
+Next Release
+------------
+
+* Added logo - [@dblock](https://github.com/dblock).
+
 0.1.0
 -----
 
