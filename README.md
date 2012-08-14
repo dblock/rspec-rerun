@@ -1,7 +1,7 @@
-RSpec-Retry [![Build Status](https://secure.travis-ci.org/dblock/rspec-retry.png)](http://travis-ci.org/dblock/rspec-retry)
+RSpec-Rerun [![Build Status](https://secure.travis-ci.org/dblock/rspec-rerun.png)](http://travis-ci.org/dblock/rspec-rerun)
 ===========
 
-TODO
+For now, see [this blog post](http://artsy.github.com/blog/2012/05/15/how-to-organize-over-3000-rspec-specs-and-retry-test-failures/).
 
 Contributing
 ------------
