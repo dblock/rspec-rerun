@@ -6,10 +6,12 @@ The **rspec-rerun** gem is a drop-in solution to retry (rerun) failed RSpec exam
 Usage
 -----
 
-Add `rspec-rerun` to `Gemfile`.
+Add `rspec-rerun` to `Gemfile` in the `:development` and `:test` groups.
 
 ``` ruby
-gem "rspec-rerun"
+group :development, :test do
+  gem "rspec-rerun"
+end
 ```
 
 Require `rspec-rerun` and change the default task in `Rakefile`.
