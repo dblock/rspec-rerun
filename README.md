@@ -21,6 +21,8 @@ require 'rspec-rerun'
 task :default => "rspec-rerun:spec"
 ```
 
+Run `rake` or `rake rspec-rerun:spec`. Failed examples will be rerun automatically.
+
 It might also be a good idea to add `rspec.failures` to `.gitignore`.
 
 History
