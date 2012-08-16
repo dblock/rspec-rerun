@@ -1,3 +1,5 @@
+require 'rspec/core/rake_task'
+
 desc "Run RSpec examples."
 RSpec::Core::RakeTask.new("rspec-rerun:run") do |t|
   t.pattern = "spec/**/*_spec.rb"
