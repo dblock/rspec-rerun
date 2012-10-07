@@ -1,3 +1,8 @@
+Next release
+------------
+
+* Fix failed `rake rspec-rerun:rerun` being falsely reported as success
+
 0.1.1
 -----
 
