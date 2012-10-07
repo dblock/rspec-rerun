@@ -1,7 +1,7 @@
 Next release
 ------------
 
-* Fix failed `rake rspec-rerun:rerun` being falsely reported as success - [jonleighton@](https://github.com/jonleighton).
+* Fix failed `rake rspec-rerun:rerun` being falsely reported as success - [@jonleighton](https://github.com/jonleighton).
 
 0.1.1
 -----
