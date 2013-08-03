@@ -1,7 +1,10 @@
 require 'rubygems'
 require 'bundler'
 
-require File.expand_path('../lib/rspec-rerun/version', __FILE__)
+libdir = File.expand_path('../lib', __FILE__)
+$LOAD_PATH.unshift(libdir) unless $LOAD_PATH.include?(libdir)
+
+require 'rspec-rerun'
 
 begin
   Bundler.setup(:default, :development)
@@ -31,7 +34,6 @@ Jeweler::RubygemsDotOrgTasks.new
 require 'rspec/core'
 require 'rspec/core/rake_task'
 
-require 'rspec-rerun'
 
 task :default => "rspec-rerun:spec"
 
