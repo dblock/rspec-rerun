@@ -40,7 +40,7 @@ describe "RakeTask" do
           end
         rescue SystemExit => e
           e.success?.should be_true
-        ensure 
+        ensure
           FileUtils.rm(RSpec::Rerun::Formatters::FailuresFormatter::FILENAME)
           ENV['RSPEC_RERUN_SELF_TEST_PASS'] = nil
         end
