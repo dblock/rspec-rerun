@@ -20,15 +20,18 @@ RSpec::Core::RakeTask.new("rspec-rerun:rerun") do |t|
 end
 
 desc "Run RSpec code examples."
-task "rspec-rerun:spec" do
+task "rspec-rerun:spec", :retry_count do |t, args|
+  retry_count = args[:retry_count] || 1
   FileUtils.rm_f RSpec::Rerun::Formatters::FailuresFormatter::FILENAME
 
   begin
     Rake::Task["rspec-rerun:run"].execute
   rescue
-    failed_count = File.read(RSpec::Rerun::Formatters::FailuresFormatter::FILENAME).split(/\n+/).count
-    puts "[#{Time.now}] Failed, rerunning #{failed_count} failure(s) ..."
-
-    Rake::Task["rspec-rerun:rerun"].execute
+    while retry_count > 0  
+      failed_count = File.read(RSpec::Rerun::Formatters::FailuresFormatter::FILENAME).split(/\n+/).count
+      puts "[#{Time.now}] Failed, rerunning #{failed_count} failure(s) ..."
+      retry_count -= 1
+      Rake::Task["rspec-rerun:rerun"].execute
+    end
   end
 end
