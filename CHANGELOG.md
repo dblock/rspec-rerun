@@ -3,6 +3,7 @@ Next Release
 
 * [#10](https://github.com/dblock/rspec-rerun/pull/10): Add optional `retry_count` argument to `rspec-rerun:spec` - [@mzikherman](https://github.com/mzikherman), [@dblock](https://github.com/dblock).
 * Added support for `RSPEC_RERUN_RETRY_COUNT` and `RSPEC_RERUN_PATTERN` environment variables - [@dblock](https://github.com/dblock).
+* Report failed count and log rake task retry messages to `$stderr` - [@dblock](https://github.com/dblock).
 * Your contribution here.
 
 0.1.2
