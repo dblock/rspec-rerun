@@ -2,7 +2,7 @@ require 'rspec/core/rake_task'
 
 desc "Run RSpec examples."
 RSpec::Core::RakeTask.new("rspec-rerun:run") do |t|
-  t.pattern = ENV['RSPEC_RERUN_PATTERN'] || "spec/**/*_spec.rb"
+  t.pattern = ENV['RSPEC_RERUN_PATTERN'] if ENV['RSPEC_RERUN_PATTERN']
   t.rspec_opts = [
     "--require", File.join(File.dirname(__FILE__), '../rspec-rerun'),
     "--format", "RSpec::Rerun::Formatters::FailuresFormatter",
@@ -12,7 +12,7 @@ end
 
 desc "Re-run failed RSpec examples."
 RSpec::Core::RakeTask.new("rspec-rerun:rerun") do |t|
-  t.pattern = ENV['RSPEC_RERUN_PATTERN'] || "spec/**/*_spec.rb"
+  t.pattern = ENV['RSPEC_RERUN_PATTERN'] if ENV['RSPEC_RERUN_PATTERN']
   t.rspec_opts = [
     "-O", RSpec::Rerun::Formatters::FailuresFormatter::FILENAME,
     "--require", File.join(File.dirname(__FILE__), '../rspec-rerun'),
@@ -23,7 +23,8 @@ end
 
 desc "Run RSpec code examples."
 task "rspec-rerun:spec", :retry_count do |t, args|
-  retry_count = (args[:retry_count] || 1).to_i
+  retry_count = (args[:retry_count] || ENV['RSPEC_RERUN_RETRY_COUNT'] || 1).to_i
+  raise "Retry count must be >= 1" if retry_count <= 0
   FileUtils.rm_f RSpec::Rerun::Formatters::FailuresFormatter::FILENAME
   begin
     Rake::Task["rspec-rerun:run"].execute
@@ -40,6 +41,7 @@ task "rspec-rerun:spec", :retry_count do |t, args|
         Rake::Task["rspec-rerun:rerun"].execute
         break
       rescue SystemExit
+        raise if retry_count == 0
       end
     end
   end

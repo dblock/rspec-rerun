@@ -27,4 +27,26 @@ describe "RakeTask" do
   it "retries a spec failure twice" do
     system! "cd #{@root} && RSPEC_RERUN_MARKER=#{@filename} RSPEC_RERUN_PATTERN=spec-runs/fails_twice_spec.rb rake rspec-rerun:spec[2]"
   end
+
+  it "retries a spec failure via RSPEC_RERUN_RETRY_COUNT" do
+    system! "cd #{@root} && RSPEC_RERUN_RETRY_COUNT=2 RSPEC_RERUN_MARKER=#{@filename} RSPEC_RERUN_PATTERN=spec-runs/fails_twice_spec.rb rake rspec-rerun:spec[2]"
+  end
+
+  it "does not retry via RSPEC_RERUN_RETRY_COUNT=0" do
+    expect {
+      system! "cd #{@root} && RSPEC_RERUN_RETRY_COUNT=0 RSPEC_RERUN_MARKER=#{@filename} RSPEC_RERUN_PATTERN=spec-runs/fails_once_spec.rb rake rspec-rerun:spec"
+    }.to raise_error RuntimeError, /failed with exit code 1/
+  end
+
+  it "fails with one too few retry counts" do
+    expect {
+      system! "cd #{@root} && RSPEC_RERUN_MARKER=#{@filename} RSPEC_RERUN_PATTERN=spec-runs/fails_twice_spec.rb rake rspec-rerun:spec"
+    }.to raise_error RuntimeError, /failed with exit code 1/
+  end
+
+  it "fails with one too few retry counts set via RSPEC_RERUN_RETRY_COUNT" do
+    expect {
+      system! "cd #{@root} && RSPEC_RERUN_RETRY_COUNT=1 RSPEC_RERUN_MARKER=#{@filename} RSPEC_RERUN_PATTERN=spec-runs/fails_twice_spec.rb rake rspec-rerun:spec"
+    }.to raise_error RuntimeError, /failed with exit code 1/
+  end
 end

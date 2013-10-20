@@ -29,7 +29,12 @@ Parameters
 
 The `rspec-rerun:spec` task accepts the following parameters:
 
-* `retry_count`: number of retries, defaults to 1
+* `retry_count`: number of retries, defaults to 1, also available by setting
+
+You can set the following global environment variables:
+
+* `RSPEC_RERUN_RETRY_COUNT`: number of retries, defaults to the value of `retry_count` or 1
+* `RSPEC_RERUN_PATTERN`: spec file pattern, defaults to the value defined by `RSpec::Core::RakeTask`
 
 Git Ignore
 ----------
