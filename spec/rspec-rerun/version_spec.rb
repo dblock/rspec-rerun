@@ -6,5 +6,3 @@ describe RSpec::Rerun do
     RSpec::Rerun::VERSION.to_f.should > 0
   end
 end
-
-

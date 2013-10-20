@@ -1,50 +1,30 @@
-require 'rake'
-require 'rspec-rerun'
+require 'spec_helper'
 
 describe "RakeTask" do
-  let(:rake) { Rake.application }
-  subject { rake["rspec-rerun:spec"] }
-
-  before do
-    rake.rake_require("tasks/rspec")
-  end
-
-  unless ENV['RSPEC_RERUN_SELF_TEST_PASS']
-    it "fails if the specs fail" do
-      if ENV['RSPEC_RERUN_SELF_TEST_FAIL']
-        fail
-      else
-        begin
-          ENV['RSPEC_RERUN_SELF_TEST_FAIL'] = "1"
-          silence_stream(STDOUT) do
-            subject.invoke
-          end
-        rescue SystemExit => e
-          e.success?.should be_false
-        ensure
-          ENV['RSPEC_RERUN_SELF_TEST_FAIL'] = nil
-        end
-      end
+  before :each do
+    @root = File.join(File.dirname(__FILE__), "../../..")
+    @filename = File.join(@root, "fail_once.state")
+    File.open @filename, "w" do |f|
+      f.write "fail"
     end
   end
 
-  unless ENV['RSPEC_RERUN_SELF_TEST_FAIL']
-    it "passes if the specs pass" do
-      if ENV['RSPEC_RERUN_SELF_TEST_PASS']
-        true.should be_true
-      else
-        begin
-          ENV['RSPEC_RERUN_SELF_TEST_PASS'] = "1"
-          silence_stream(STDOUT) do
-            subject.invoke
-          end
-        rescue SystemExit => e
-          e.success?.should be_true
-        ensure
-          FileUtils.rm(RSpec::Rerun::Formatters::FailuresFormatter::FILENAME)
-          ENV['RSPEC_RERUN_SELF_TEST_PASS'] = nil
-        end
-      end
+  around :each do |example|
+    silence_stream STDOUT do
+      example.run
     end
+    FileUtils.rm_f @filename
+  end
+
+  it "succeeds" do
+    system! "cd #{@root} && RSPEC_RERUN_MARKER=#{@filename} RSPEC_RERUN_PATTERN=spec-runs/succeeds_spec.rb rake rspec-rerun:spec"
+  end
+
+  it "retries a spec failure once" do
+    system! "cd #{@root} && RSPEC_RERUN_MARKER=#{@filename} RSPEC_RERUN_PATTERN=spec-runs/fails_once_spec.rb rake rspec-rerun:spec"
+  end
+
+  it "retries a spec failure twice" do
+    system! "cd #{@root} && RSPEC_RERUN_MARKER=#{@filename} RSPEC_RERUN_PATTERN=spec-runs/fails_twice_spec.rb rake rspec-rerun:spec[2]"
   end
 end
