@@ -2,7 +2,7 @@
 
 [![Build Status](https://secure.travis-ci.org/dblock/rspec-rerun.png)](http://travis-ci.org/dblock/rspec-rerun)
 
-The **rspec-rerun** gem is a drop-in solution to retry (rerun) failed RSpec examples. It may be useful, for example, with finicky Capybara tests. The strategy to rerun failed specs is to output a file called `rspec.failures` that contains a list of failed examples and to feed that file back to RSpec via `-e`. 
+The **rspec-rerun** gem is a drop-in solution to retry (rerun) failed RSpec examples. It may be useful, for example, with finicky Capybara tests. The strategy to rerun failed specs is to output a file called `rspec.failures` that contains a list of failed examples and to feed that file back to RSpec via `-e`.
 
 Usage
 -----
@@ -24,7 +24,17 @@ task :default => "rspec-rerun:spec"
 
 Run `rake` or `rake rspec-rerun:spec`. Failed examples will be rerun automatically.
 
-It might also be a good idea to add `rspec.failures` to `.gitignore`.
+Parameters
+----------
+
+The `rspec-rerun:spec` task accepts the following parameters:
+
+* `retry_count`: number of retries, defaults to 1
+
+Git Ignore
+----------
+
+A list of failed examples is stored in a file called `rspec.failures`. It might also be a good idea that you add `rspec.failures` to `.gitignore`.
 
 History
 -------
