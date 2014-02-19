@@ -11,7 +11,8 @@ task "rspec-rerun:run", :node_total, :node_index do |t, args|
     File.exist?(".rspec") ? File.read(".rspec").split(/\n+/).map { |l| l.shellsplit } : nil
   ].flatten
 
-  all_files = FileList[ @pattern ].sort.map(&:shellescape)
+  rand = Random.new(1)
+  all_files = FileList[ @pattern ].shuffle(random: rand).map(&:shellescape)
   slice_size = (all_files.size/(args[:node_total].to_f)).ceil
   sliced_files = all_files.each_slice(slice_size).to_a
   files_to_run = sliced_files[args[:node_index]]
