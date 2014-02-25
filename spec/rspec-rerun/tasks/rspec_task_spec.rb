@@ -51,4 +51,18 @@ describe "RakeTask" do
       system! "cd #{@root} && RSPEC_RERUN_RETRY_COUNT=1 RSPEC_RERUN_MARKER=#{@filename} RSPEC_RERUN_PATTERN=spec-runs/fails_twice_spec.rb rake rspec-rerun:spec"
     }.to raise_error RuntimeError, /failed with exit code 1/
   end
+
+  it "runs half the tests with RSPEC_NODE_TOTAL set to 2 and RSPEC_NODE_INDEX set to 0" do
+    system! "cd #{@root} && RSPEC_NODE_TOTAL=2 RSPEC_NODE_INDEX=0 RSPEC_PARALLEL_RANDOMIZATION=false RSPEC_RERUN_MARKER=#{@filename} RSPEC_RERUN_PATTERN=spec-runs/parallel-runs/*_spec.rb rake rspec-rerun:spec"
+  end
+
+  it "runs all tests without RSPEC_NODE_TOTAL and RSPEC_NODE_INDEX set" do
+    expect {
+      system! "cd #{@root} && RSPEC_NODE_INDEX=0 RSPEC_PARALLEL_RANDOMIZATION=false RSPEC_RERUN_MARKER=#{@filename} RSPEC_RERUN_PATTERN=spec-runs/parallel-runs/*_spec.rb rake rspec-rerun:spec"
+    }.to raise_error RuntimeError, /failed with exit code 1/
+    
+    expect {
+      system! "cd #{@root} && RSPEC_NODE_TOTAL=1 RSPEC_PARALLEL_RANDOMIZATION=false RSPEC_RERUN_MARKER=#{@filename} RSPEC_RERUN_PATTERN=spec-runs/parallel-runs/*_spec.rb rake rspec-rerun:spec"
+    }.to raise_error RuntimeError, /failed with exit code 1/
+  end
 end
