@@ -35,6 +35,9 @@ You can set the following global environment variables:
 
 * `RSPEC_RERUN_RETRY_COUNT`: number of retries, defaults to the value of `retry_count` or 1
 * `RSPEC_RERUN_PATTERN`: spec file pattern, defaults to the value defined by `RSpec::Core::RakeTask`
+* `RSPEC_RERUN_PARALLEL_NODE_TOTAL`: for parallelism, this is the total number of nodes the test will be distributed across, defaults to 1
+* `RSPEC_RERUN_PARALLEL_NODE_INDEX`: for parallelism, this is the zero-indexed current node, defaults to 0
+* `RSPEC_RERUN_PARALLEL_RANDOMIZATION`: for parallelism, determines whether the test files will be randomized before distributing across nodes, defaults to true. This is to help evenly balance slow tests across many machines.
 
 Git Ignore
 ----------
