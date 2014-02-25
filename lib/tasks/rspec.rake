@@ -3,15 +3,15 @@ require 'rspec/core/rake_task'
 desc "Run RSpec examples."
 RSpec::Core::RakeTask.new("rspec-rerun:run") do |t|
   t.pattern = ENV['RSPEC_RERUN_PATTERN'] if ENV['RSPEC_RERUN_PATTERN']
-  if ENV['RSPEC_NODE_TOTAL'] && ENV['RSPEC_NODE_INDEX']
-    node_total = (ENV['RSPEC_NODE_TOTAL'] || 1).to_i
-    node_index = (ENV['RSPEC_NODE_INDEX'] || 0).to_i
+  if ENV['RSPEC_RERUN_PARALLEL_NODE_TOTAL'] && ENV['RSPEC_RERUN_PARALLEL_NODE_INDEX']
+    node_total = (ENV['RSPEC_RERUN_PARALLEL_NODE_TOTAL'] || 1).to_i
+    node_index = (ENV['RSPEC_RERUN_PARALLEL_NODE_INDEX'] || 0).to_i
 
     all_files = FileList[t.pattern]
 
     # Deterministically shuffle tests so slow specs are evenly distributed among nodes
     rand = Random.new(1)
-    all_files.shuffle!(random: rand) unless ENV['RSPEC_PARALLEL_RANDOMIZATION'] == 'false'
+    all_files.shuffle!(random: rand) unless ENV['RSPEC_RERUN_PARALLEL_RANDOMIZATION'] == 'false'
 
     slice_size = (all_files.size/(node_total.to_f)).ceil
     sliced_files = all_files.each_slice(slice_size).to_a
