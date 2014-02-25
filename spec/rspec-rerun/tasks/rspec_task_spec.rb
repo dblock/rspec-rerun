@@ -1,6 +1,8 @@
 require 'spec_helper'
 
 describe "RakeTask" do
+  let(:failures_file) { RSpec::Rerun::Formatters::FailuresFormatter::FILENAME }
+
   before :each do
     @root = File.join(File.dirname(__FILE__), "../../..")
     @filename = File.join(@root, "fail_once.state")
@@ -13,7 +15,7 @@ describe "RakeTask" do
     silence_stream STDOUT do
       example.run
     end
-    FileUtils.rm_f @filename
+    FileUtils.rm_f [@filename, failures_file]
   end
 
   it "succeeds" do
