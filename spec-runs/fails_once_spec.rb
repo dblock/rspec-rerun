@@ -1,13 +1,13 @@
 require 'spec_helper'
 
-describe "Fails" do
-  it "once" do
+describe 'Fails' do
+  it 'once' do
     filename = ENV['RSPEC_RERUN_MARKER']
-    if File.exists? filename
+    if File.exist? filename
       File.delete filename
       fail
     else
-      true.should be_true
+      true.should eq true
     end
   end
 end

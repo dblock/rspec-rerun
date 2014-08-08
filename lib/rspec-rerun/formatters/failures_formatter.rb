@@ -4,12 +4,11 @@ module RSpec
   module Rerun
     module Formatters
       class FailuresFormatter < RSpec::Core::Formatters::BaseFormatter
-
-      	FILENAME = "rspec.failures"
+        FILENAME = 'rspec.failures'
 
         def dump_failures
           return if failed_examples.empty?
-          f = File.new(FILENAME, "w+")
+          f = File.new(FILENAME, 'w+')
           failed_examples.each do |example|
             f.puts retry_command(example)
           end
@@ -21,11 +20,8 @@ module RSpec
         end
 
         def clean!
-    		  if File.exists? FILENAME
-    		    File.delete FILENAME
-    		  end
+          File.delete FILENAME if File.exist? FILENAME
         end
-
       end
     end
   end

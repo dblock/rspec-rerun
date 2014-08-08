@@ -1,20 +1,20 @@
 require 'spec_helper'
 
-describe "Fails" do
-  it "twice" do
+describe 'Fails' do
+  it 'twice' do
     filename_once = ENV['RSPEC_RERUN_MARKER']
-    filename_twice = File.join(File.dirname(filename_once), "fail_twice.state")
-    if File.exists? filename_once
+    filename_twice = File.join(File.dirname(filename_once), 'fail_twice.state')
+    if File.exist? filename_once
       File.delete filename_once
-      File.open filename_twice, "w" do |f|
-        f.write "fail"
+      File.open filename_twice, 'w' do |f|
+        f.write 'fail'
       end
       fail
-    elsif File.exists? filename_twice
+    elsif File.exist? filename_twice
       File.delete filename_twice
       fail
     else
-      true.should be_true
+      true.should eq true
     end
   end
 end

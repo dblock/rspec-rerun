@@ -1,6 +1,9 @@
 Next Release
 ------------
-* [#12](https://github.com/dblock/rspec-rerun/issues/12): Fixing execution of tests without names.
+
+* [#12](https://github.com/dblock/rspec-rerun/issues/12): Fixing execution of tests without names - [@KurtPreston](https://github.com/KurtPreston).
+* Removed Jeweler and rewritten rspec-rerun.gemspec - [@dblock](https://github.com/dblock).
+* Added Rubocop, Ruby-style linter - [@dblock](https://github.com/dblock).
 
 0.1.3
 -----
