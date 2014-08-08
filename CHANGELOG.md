@@ -1,7 +1,6 @@
 Next Release
 ------------
-
-* Your contribution here.
+* [#12](https://github.com/dblock/rspec-rerun/issues/12): Fixing execution of tests without names.
 
 0.1.3
 -----

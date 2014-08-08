@@ -8,6 +8,9 @@ describe RSpec::Rerun::Formatters::FailuresFormatter do
   let(:example) { RSpec::Core::ExampleGroup.describe.example "test" }
   let(:failures_file) { RSpec::Rerun::Formatters::FailuresFormatter::FILENAME }
 
+  before { FileUtils.rm(failures_file) if File.exists?(failures_file) }
+  after  { FileUtils.rm(failures_file) if File.exists?(failures_file) }
+
   describe 'example_passed' do
     it 'should not create an rspec.failures file' do
       formatter.example_passed(example)
@@ -21,13 +24,13 @@ describe RSpec::Rerun::Formatters::FailuresFormatter do
       formatter.example_failed(example)
       formatter.dump_failures
       File.exists?(failures_file).should be_true
-      File.read(failures_file).strip.should == '-e " test"'
+      File.read(failures_file).strip.should == example.location
     end
     it 'should create one line per failed example' do
       2.times { formatter.example_failed(example) }
       formatter.dump_failures
       File.exists?(failures_file).should be_true
-      File.read(failures_file).split("\n").should == [ '-e " test"', '-e " test"' ]
+      File.read(failures_file).split("\n").should == [example.location, example.location]
     end
   end
 
