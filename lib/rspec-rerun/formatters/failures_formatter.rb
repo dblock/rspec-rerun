@@ -17,8 +17,7 @@ module RSpec
         end
 
         def retry_command(example)
-          example_name = example.full_description.gsub("\"", "\\\"")
-          "-e \"#{example_name}\""
+          example.location.gsub("\"", "\\\"")
         end
 
         def clean!

@@ -13,10 +13,12 @@ end
 
 desc "Re-run failed RSpec examples."
 RSpec::Core::RakeTask.new("rspec-rerun:rerun") do |t|
+  failing_specs = File.read(RSpec::Rerun::Formatters::FailuresFormatter::FILENAME).split
+
   t.pattern = ENV['RSPEC_RERUN_PATTERN'] if ENV['RSPEC_RERUN_PATTERN']
   t.fail_on_error = false
   t.rspec_opts = [
-    "-O", RSpec::Rerun::Formatters::FailuresFormatter::FILENAME,
+    failing_specs.join(' '),
     "--require", File.join(File.dirname(__FILE__), '../rspec-rerun'),
     "--format", "RSpec::Rerun::Formatters::FailuresFormatter",
     File.exist?(".rspec") ? File.read(".rspec").split(/\n+/).map { |l| l.shellsplit } : nil
