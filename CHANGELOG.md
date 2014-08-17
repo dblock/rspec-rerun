@@ -5,6 +5,7 @@ Next Release
 * Removed Jeweler and rewritten rspec-rerun.gemspec - [@dblock](https://github.com/dblock).
 * Added Rubocop, Ruby-style linter - [@dblock](https://github.com/dblock).
 * Additionally use progress or other formatter specified in .rspec
+* Support ~/.rspec
 
 0.1.3
 -----

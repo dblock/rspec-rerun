@@ -11,7 +11,10 @@ describe 'RakeTask' do
 
   around :each do |example|
     silence_stream STDOUT do
-      example.run
+      Dir.mktmpdir do |dir|
+        ENV['HOME'] = dir
+        example.run
+      end
     end
     FileUtils.rm_f @filename
   end
@@ -52,6 +55,7 @@ describe 'RakeTask' do
 
   context 'preserving .rspec' do
     let(:dot_rspec) { "#{root}/.rspec" }
+    let(:home_rspec) { File.expand_path('~/.rspec') }
     let(:run) { `cd #{root} && RSPEC_RERUN_RETRY_COUNT=1 RSPEC_RERUN_MARKER=#{@filename} RSPEC_RERUN_PATTERN=spec-runs/fails_twice_spec.rb rake rspec-rerun:spec 2>&1` }
 
     around :each do |test|
@@ -75,6 +79,11 @@ describe 'RakeTask' do
 
     it 'also uses given formatter' do
       File.write(dot_rspec, "--color\n--format documentation")
+      run.should include '--format documentation'
+    end
+
+    it 'also uses given formatter from home' do
+      File.write(File.expand_path('~/.rspec'), "--color\n--format documentation")
       run.should include '--format documentation'
     end
   end
