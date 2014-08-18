@@ -4,6 +4,7 @@ $LOAD_PATH.unshift(File.dirname(__FILE__))
 require 'rspec'
 require 'rake'
 require 'rspec-rerun'
+require 'tmpdir'
 
 %w(support examples).each do |dir|
   Dir[File.join(File.dirname(__FILE__), dir, '*.rb')].each do |file|

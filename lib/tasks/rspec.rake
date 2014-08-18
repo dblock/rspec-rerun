@@ -2,7 +2,8 @@ require 'rspec/core/rake_task'
 
 desc "Run RSpec examples."
 RSpec::Core::RakeTask.new("rspec-rerun:run") do |t|
-  dot_rspec = File.exist?(".rspec") ? File.read(".rspec").split(/\n+/).map { |l| l.shellsplit } : []
+  dot_rspec = [".rspec", File.expand_path("~/.rspec")].detect { |f| File.exist?(f) }
+  dot_rspec = (dot_rspec ? File.read(dot_rspec).split(/\n+/).map { |l| l.shellsplit } : [])
   dot_rspec.concat ["--format", "progress"] unless dot_rspec.include?("--format")
 
   t.pattern = ENV['RSPEC_RERUN_PATTERN'] if ENV['RSPEC_RERUN_PATTERN']
