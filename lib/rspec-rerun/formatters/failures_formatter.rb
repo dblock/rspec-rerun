@@ -1,3 +1,6 @@
+require 'rspec/support'
+require 'rspec/core'
+require 'rspec/legacy_formatters'
 require 'rspec/core/formatters/base_formatter'
 
 module RSpec

@@ -11,7 +11,8 @@ Gem::Specification.new do |s|
   s.files = `git ls-files`.split($INPUT_RECORD_SEPARATOR)
   s.test_files = s.files.grep(/^(spec)\//)
 
-  s.add_runtime_dependency 'rspec', '>= 2.11.0', '< 3'
+  s.add_runtime_dependency 'rspec', '~> 3.0'
+  s.add_runtime_dependency 'rspec-legacy_formatters'
 
   s.add_development_dependency 'rake'
   s.add_development_dependency 'bundler'

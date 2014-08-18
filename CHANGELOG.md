@@ -1,7 +1,11 @@
-0.2.1 (Next)
+0.3.0 (Next)
 ------------
 
 * Your contribution here.
+* Upgraded to RSpec 3. This version is not compatible with RSpec 2.x anymore.
+
+0.2.1
+-----
 * [#23](https://github.com/dblock/rspec-rerun/issues/23): Fixed dual formatter error - [@KurtPreston](https://github.com/KurtPreston)
 
 0.2.0
