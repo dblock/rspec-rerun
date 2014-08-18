@@ -1,6 +1,7 @@
 Next Release
 ------------
 
+* [#14](https://github.com/dblock/rspec-rerun/issues/14), [#2](https://github.com/dblock/rspec-rerun/issues/2), [#19](https://github.com/dblock/rspec-rerun/pull/19): Additionally use progress or other formatter specified in .rspec - [@grosser](https://github.com/grosser).
 * [#12](https://github.com/dblock/rspec-rerun/issues/12): Fixing execution of tests without names - [@KurtPreston](https://github.com/KurtPreston).
 * Removed Jeweler and rewritten rspec-rerun.gemspec - [@dblock](https://github.com/dblock).
 * Added Rubocop, Ruby-style linter - [@dblock](https://github.com/dblock).
