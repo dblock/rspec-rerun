@@ -2,6 +2,7 @@
 ------------
 
 * Your contribution here.
+* [#23](https://github.com/dblock/rspec-rerun/issues/23): Fixed dual formatter error - [@KurtPreston](https://github.com/KurtPreston)
 
 0.2.0
 -----

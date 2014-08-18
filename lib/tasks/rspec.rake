@@ -2,16 +2,12 @@ require 'rspec/core/rake_task'
 
 desc "Run RSpec examples."
 RSpec::Core::RakeTask.new("rspec-rerun:run") do |t|
-  dot_rspec = [".rspec", File.expand_path("~/.rspec")].detect { |f| File.exist?(f) }
-  dot_rspec = (dot_rspec ? File.read(dot_rspec).split(/\n+/).map { |l| l.shellsplit } : [])
-  dot_rspec.concat ["--format", "progress"] unless dot_rspec.include?("--format")
-
   t.pattern = ENV['RSPEC_RERUN_PATTERN'] if ENV['RSPEC_RERUN_PATTERN']
   t.fail_on_error = false
   t.rspec_opts = [
     "--require", File.join(File.dirname(__FILE__), '../rspec-rerun'),
     "--format", "RSpec::Rerun::Formatters::FailuresFormatter",
-    *dot_rspec
+    *dot_rspec_params
   ].flatten
 end
 
@@ -25,7 +21,7 @@ RSpec::Core::RakeTask.new("rspec-rerun:rerun") do |t|
     failing_specs.join(' '),
     "--require", File.join(File.dirname(__FILE__), '../rspec-rerun'),
     "--format", "RSpec::Rerun::Formatters::FailuresFormatter",
-    File.exist?(".rspec") ? File.read(".rspec").split(/\n+/).map { |l| l.shellsplit } : nil
+    *dot_rspec_params
   ].flatten
 end
 
@@ -48,4 +44,16 @@ task "rspec-rerun:spec", :retry_count do |t, args|
     $stderr.puts "[#{Time.now}] #{failed_count} failure#{failed_count == 1 ? '' : 's'}."
     fail "#{failed_count} failure#{failed_count == 1 ? '' : 's'}"
   end
+end
+
+def dot_rspec_params
+  dot_rspec_file = [".rspec", File.expand_path("~/.rspec")].detect { |f| File.exist?(f) }
+  dot_rspec = if dot_rspec_file
+                file_contents = File.read(dot_rspec_file)
+                file_contents.split(/\n+/).map { |l| l.shellsplit }.flatten
+              else
+                []
+              end
+  dot_rspec.concat ["--format", "progress"] unless dot_rspec.include?("--format")
+  dot_rspec
 end
