@@ -1,5 +1,5 @@
-Next Release
-------------
+0.2.0
+-----
 
 * [#20](https://github.com/dblock/rspec-rerun/pull/20): Added support for ~/.rspec - [@grosser](https://github.com/grosser).
 * [#14](https://github.com/dblock/rspec-rerun/issues/14), [#2](https://github.com/dblock/rspec-rerun/issues/2), [#19](https://github.com/dblock/rspec-rerun/pull/19): Additionally use progress or other formatter specified in .rspec - [@grosser](https://github.com/grosser).
