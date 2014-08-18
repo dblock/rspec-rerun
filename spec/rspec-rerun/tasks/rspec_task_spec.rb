@@ -77,6 +77,12 @@ describe 'RakeTask' do
       run.should include '--format progress'
     end
 
+    it 'only uses the formatter specified by the .rspec file' do
+      File.write(dot_rspec, '--format documentation')
+      run.should include '--format documentation'
+      run.should_not include '--format progress'
+    end
+
     it 'also uses given formatter' do
       File.write(dot_rspec, "--color\n--format documentation")
       run.should include '--format documentation'
