@@ -12,8 +12,10 @@ require 'tmpdir'
   end
 end
 
-RSpec.configure do |config|
-  config.expect_with :rspec do |c|
-    c.syntax = [:should, :expect]
+if RSpec::Rerun.rspec3?
+  RSpec.configure do |config|
+    config.expect_with :rspec do |c|
+      c.syntax = [:should, :expect]
+    end
   end
 end

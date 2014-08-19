@@ -8,10 +8,12 @@ Usage
 -----
 
 Add `rspec-rerun` to `Gemfile` in the `:development` and `:test` groups.
+If you're using RSpec 3, also add `rspec-legacy_formatters`.
 
 ``` ruby
 group :development, :test do
-  gem "rspec-rerun"
+  gem 'rspec-rerun'
+  gem 'rspec-legacy_formatters'
 end
 ```
 
@@ -19,7 +21,7 @@ Require `rspec-rerun` and change the default task in `Rakefile`.
 
 ``` ruby
 require 'rspec-rerun'
-task :default => "rspec-rerun:spec"
+task :default => 'rspec-rerun:spec'
 ```
 
 Run `rake` or `rake rspec-rerun:spec`. Failed examples will be rerun automatically.

@@ -1,3 +1,4 @@
 Gemfile.lock
 pkg
 rspec.failures
+.bundle

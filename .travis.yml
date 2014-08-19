@@ -4,7 +4,6 @@ cache: bundler
 
 rvm:
   - 2.1.2
-  - 2.1.0
   - 2.0.0
   - 1.9.3
   - rbx-2.2.10
@@ -16,3 +15,8 @@ matrix:
   allow_failures:
     - rvm: ruby-head
     - rvm: jruby-head
+
+env:
+  - RSPEC_VERSION=2
+  - RSPEC_VERSION=3
+

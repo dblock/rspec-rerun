@@ -1,4 +1,5 @@
 require './lib/rspec-rerun/version'
+require './lib/rspec-rerun/rspec'
 
 Gem::Specification.new do |s|
   s.name = 'rspec-rerun'
@@ -11,8 +12,7 @@ Gem::Specification.new do |s|
   s.files = `git ls-files`.split($INPUT_RECORD_SEPARATOR)
   s.test_files = s.files.grep(/^(spec)\//)
 
-  s.add_runtime_dependency 'rspec', '~> 3.0'
-  s.add_runtime_dependency 'rspec-legacy_formatters'
+  s.add_runtime_dependency 'rspec'
 
   s.add_development_dependency 'rake'
   s.add_development_dependency 'bundler'

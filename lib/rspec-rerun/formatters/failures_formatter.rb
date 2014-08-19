@@ -1,6 +1,18 @@
-require 'rspec/support'
 require 'rspec/core'
-require 'rspec/legacy_formatters'
+
+if RSpec::Rerun.rspec3?
+  begin
+    require 'rspec/legacy_formatters'
+  rescue LoadError => e
+    STDERR.puts '*' * 80
+    STDERR.puts e.message
+    STDERR.puts 'Please add rspec-legacy_formatters to your Gemfile.'
+    STDERR.puts 'See https://github.com/dblock/rspec-rerun/pull/22 for details.'
+    STDERR.puts '*' * 80
+    raise
+  end
+end
+
 require 'rspec/core/formatters/base_formatter'
 
 module RSpec
