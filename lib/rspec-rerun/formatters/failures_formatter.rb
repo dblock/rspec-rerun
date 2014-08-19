@@ -1,4 +1,5 @@
 require 'rspec/core'
+require 'rspec-rerun/rspec'
 
 if RSpec::Rerun.rspec3?
   begin
