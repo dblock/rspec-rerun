@@ -4,6 +4,7 @@
 * [#22](https://github.com/dblock/rspec-rerun/pull/22): Added support for RSpec 3 - [@nightscape](https://github.com/nightscape), [@dblock](https://github.com/dblock).
 * [#23](https://github.com/dblock/rspec-rerun/issues/23): Fixed dual formatter error - [@KurtPreston](https://github.com/KurtPreston).
 * Allow disabling RSpec verbose output - [@KurtPreston](https://github.com/KurtPreston).
+* Option to run on a specific tag - [@KurtPreston](https://github.com/KurtPreston).
 * Your contribution here.
 
 0.2.0
