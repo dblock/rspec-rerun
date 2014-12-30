@@ -1,6 +1,9 @@
 ![rspec-rerun](https://raw.github.com/dblock/rspec-rerun/master/rspec-rerun.png)
 
-[![Build Status](https://secure.travis-ci.org/dblock/rspec-rerun.png)](http://travis-ci.org/dblock/rspec-rerun)
+[![Gem Version](http://img.shields.io/gem/v/rspec-rerun.svg)](http://badge.fury.io/rb/rspec-rerun)
+[![Build Status](http://img.shields.io/travis/dblock/rspec-rerun.svg)](https://travis-ci.org/dblock/rspec-rerun)
+[![Dependency Status](https://gemnasium.com/dblock/rspec-rerun.svg)](https://gemnasium.com/dblock/rspec-rerun)
+[![Code Climate](https://codeclimate.com/github/dblock/rspec-rerun.svg)](https://codeclimate.com/github/dblock/rspec-rerun)
 
 The **rspec-rerun** gem is a drop-in solution to retry (rerun) failed RSpec examples. It may be useful, for example, with finicky Capybara tests. The strategy to rerun failed specs is to output a file called `rspec.failures` that contains a list of failed examples and to feed that file back to RSpec via `-e`.
 
