@@ -2,7 +2,6 @@ require 'spec_helper'
 require 'stringio'
 
 describe RSpec::Rerun::Formatters::FailuresFormatter do
-
   let(:output) { StringIO.new }
   let(:formatter) { RSpec::Rerun::Formatters::FailuresFormatter.new(output) }
   let(:example) { RSpec::Core::ExampleGroup.describe.example 'test' }
@@ -51,5 +50,4 @@ describe RSpec::Rerun::Formatters::FailuresFormatter do
   after :each do
     formatter.clean!
   end
-
 end

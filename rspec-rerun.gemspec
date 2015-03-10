@@ -16,5 +16,5 @@ Gem::Specification.new do |s|
 
   s.add_development_dependency 'rake'
   s.add_development_dependency 'bundler'
-  s.add_development_dependency 'rubocop', '0.24.1'
+  s.add_development_dependency 'rubocop', '0.29.1'
 end
