@@ -56,12 +56,11 @@ Rerunning failed specs has been a long requested feature [#456](https://github.c
 Contributing
 ------------
 
-Fork the project. Make your feature addition or bug fix with tests. Send a pull request. Bonus points for topic branches.
+See [CONTRIBUTING](CONTRIBUTING.md).
 
 Copyright and License
 ---------------------
 
-MIT License, see [LICENSE](https://github.com/dblock/rspec-rerun/blob/master/LICENSE.md) for details.
+MIT License, see [LICENSE](LICENSE.md) for details.
 
-(c) 2012-2014 [Artsy Inc.](http://artsy.github.com), [Daniel Doubrovkine](https://github.com/dblock) and [Contributors](https://github.com/dblock/rspec-rerun/blob/master/CHANGELOG.md)
-
+(c) 2012-2015 [Artsy Inc.](http://artsy.github.com), [Daniel Doubrovkine](https://github.com/dblock) and [Contributors](https://github.com/dblock/rspec-rerun/blob/master/CHANGELOG.md)
