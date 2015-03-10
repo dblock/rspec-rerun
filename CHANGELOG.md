@@ -1,11 +1,10 @@
-0.3.0 (Next)
-------------
+0.3.0 (3/10/2015)
+-----------------
 
 * [#22](https://github.com/dblock/rspec-rerun/pull/22): Added support for RSpec 3 - [@nightscape](https://github.com/nightscape), [@dblock](https://github.com/dblock).
 * [#23](https://github.com/dblock/rspec-rerun/issues/23): Fixed dual formatter error - [@KurtPreston](https://github.com/KurtPreston).
 * [#26](https://github.com/dblock/rspec-rerun/pull/26): Allow disabling RSpec verbose output - [@KurtPreston](https://github.com/KurtPreston).
 * [#26](https://github.com/dblock/rspec-rerun/pull/26): Added support for running on a specific tag - [@KurtPreston](https://github.com/KurtPreston).
-* Your contribution here.
 
 0.2.0
 -----
