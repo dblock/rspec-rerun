@@ -86,7 +86,7 @@ def parse_args(args)
 
   # Parse environment variables
   opts[:pattern] ||= ENV['RSPEC_RERUN_PATTERN'] if ENV['RSPEC_RERUN_PATTERN']
-  opts[:tag] ||= ENV['RSPEC_RERUN_TAG'] if ENV['RSPEC_RERUN_PATTERN']
+  opts[:tag] ||= ENV['RSPEC_RERUN_TAG'] if ENV['RSPEC_RERUN_TAG']
   opts[:retry_count] ||= ENV['RSPEC_RERUN_RETRY_COUNT'] if ENV['RSPEC_RERUN_RETRY_COUNT']
   opts[:verbose] = (ENV['RSPEC_RERUN_VERBOSE'] != 'false') if opts[:verbose].nil?
 
