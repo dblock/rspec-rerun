@@ -1,21 +1,26 @@
-$LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
-$LOAD_PATH.unshift(File.dirname(__FILE__))
-
-require 'rspec'
-require 'rake'
+require 'bundler/setup'
 require 'rspec-rerun'
 require 'tmpdir'
 
-%w(support examples).each do |dir|
-  Dir[File.join(File.dirname(__FILE__), dir, '*.rb')].each do |file|
-    require file
-  end
-end
-
-if RSpec::Rerun.rspec3?
-  RSpec.configure do |config|
+RSpec.configure do |config|
+  if RSpec::Rerun.rspec3?
     config.expect_with :rspec do |c|
       c.syntax = [:should, :expect]
     end
   end
+
+  config.include(Module.new do
+    def silence_stream(stream)
+      old_stream = stream.dup
+      stream.reopen('/dev/null')
+      stream.sync = true
+      yield
+    ensure
+      stream.reopen(old_stream)
+    end
+
+    def system!(cmd)
+      fail "failed with exit code #{$?.exitstatus}" unless system(cmd)
+    end
+  end)
 end

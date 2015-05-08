@@ -9,6 +9,7 @@ describe RSpec::Rerun::Formatters::FailuresFormatter do
 
   before { FileUtils.rm(failures_file) if File.exist?(failures_file) }
   after  { FileUtils.rm(failures_file) if File.exist?(failures_file) }
+  after { formatter.clean! }
 
   describe 'example_passed' do
     it 'should not create an rspec.failures file' do
@@ -25,6 +26,7 @@ describe RSpec::Rerun::Formatters::FailuresFormatter do
       File.exist?(failures_file).should eq true
       File.read(failures_file).strip.should == example.location
     end
+
     it 'should create one line per failed example' do
       2.times { formatter.example_failed(example) }
       formatter.dump_failures
@@ -37,6 +39,7 @@ describe RSpec::Rerun::Formatters::FailuresFormatter do
     it "doesn't raise errors when the retry file doesn't exist" do
       -> { formatter.clean! }.should_not raise_error
     end
+
     it 'deletes the retry file' do
       File.open(failures_file, 'w+') do |f|
         f.puts 'test'
@@ -45,9 +48,5 @@ describe RSpec::Rerun::Formatters::FailuresFormatter do
       formatter.clean!
       File.exist?(failures_file).should eq false
     end
-  end
-
-  after :each do
-    formatter.clean!
   end
 end
