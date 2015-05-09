@@ -1,5 +1,4 @@
 require './lib/rspec-rerun/version'
-require './lib/rspec-rerun/rspec'
 
 Gem::Specification.new do |s|
   s.name = 'rspec-rerun'
@@ -9,8 +8,7 @@ Gem::Specification.new do |s|
   s.email = 'dblock@dblock.org'
   s.homepage = 'https://github.com/dblock/rspec-rerun'
   s.license = 'MIT'
-  s.files = `git ls-files`.split($INPUT_RECORD_SEPARATOR)
-  s.test_files = s.files.grep(/^(spec)\//)
+  s.files = `git ls-files lib README.md`.split($INPUT_RECORD_SEPARATOR)
 
   s.add_runtime_dependency 'rspec'
 

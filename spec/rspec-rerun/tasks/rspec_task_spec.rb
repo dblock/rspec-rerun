@@ -1,12 +1,10 @@
 require 'spec_helper'
 
 describe 'RakeTask' do
-  let(:root) { File.join(File.dirname(__FILE__), '../../..') }
+  let(:root) { Bundler.root }
   before :each do
     @filename = File.join(root, 'fail_once.state')
-    File.open @filename, 'w' do |f|
-      f.write 'fail'
-    end
+    File.write @filename, 'fail'
   end
 
   around :each do |example|
