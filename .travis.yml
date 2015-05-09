@@ -15,8 +15,3 @@ matrix:
   allow_failures:
     - rvm: ruby-head
     - rvm: jruby-head
-
-env:
-  - RSPEC_VERSION=2
-  - RSPEC_VERSION=3
-
