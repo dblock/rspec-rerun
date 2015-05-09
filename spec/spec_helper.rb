@@ -3,10 +3,8 @@ require 'rspec-rerun'
 require 'tmpdir'
 
 RSpec.configure do |config|
-  if RSpec::Rerun.rspec3?
-    config.expect_with :rspec do |c|
-      c.syntax = [:should, :expect]
-    end
+  config.expect_with :rspec do |c|
+    c.syntax = [:should, :expect]
   end
 
   config.include(Module.new do

@@ -2,6 +2,7 @@
 ------
 
 * Your contribution here.
+* [#33](https://github.com/dblock/rspec-rerun/pull/33): Only support RSpec 3 - [@grosser](https://github.com/grosser).
 
 0.3.1 (5/12/2015)
 -----------------
