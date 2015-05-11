@@ -2,6 +2,7 @@
 ------------
 
 * Your contribution here.
+* [#30](https://github.com/dblock/rspec-rerun/pull/30): Fixed RSPEC_RERUN_TAG option issue - [@kinopyo](https://github.com/kinopyo).
 
 0.3.0 (3/10/2015)
 -----------------
