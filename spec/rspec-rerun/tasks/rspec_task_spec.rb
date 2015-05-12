@@ -53,24 +53,25 @@ describe 'RakeTask' do
 
   context 'verbose output' do
     it 'displays the rspec command by default' do
-      `cd #{root} && RSPEC_RERUN_MARKER=#{@filename} RSPEC_RERUN_PATTERN=spec-runs/succeeds_spec.rb rake rspec-rerun:spec`.should include('rspec')
+      expect(`cd #{root} && RSPEC_RERUN_MARKER=#{@filename} RSPEC_RERUN_PATTERN=spec-runs/succeeds_spec.rb rake rspec-rerun:spec`).to include('rspec')
     end
 
     context 'when the RSPEC_RERUN_VERBOSE flag is set to false' do
       it "doesn't display the rspec command" do
-        `cd #{root} && RSPEC_RERUN_VERBOSE=false RSPEC_RERUN_MARKER=#{@filename} RSPEC_RERUN_PATTERN=spec-runs/succeeds_spec.rb rake rspec-rerun:spec`.should_not include('rspec')
+        result = `cd #{root} && RSPEC_RERUN_VERBOSE=false RSPEC_RERUN_MARKER=#{@filename} RSPEC_RERUN_PATTERN=spec-runs/succeeds_spec.rb rake rspec-rerun:spec`
+        expect(result).not_to include('rspec')
       end
     end
   end
 
   context 'tag execution' do
     it 'does not scope by tag by default' do
-      `cd #{root} && RSPEC_RERUN_MARKER=#{@filename} RSPEC_RERUN_PATTERN=spec-runs/succeeds_spec.rb rake rspec-rerun:spec`.should_not include('--tag')
+      expect(`cd #{root} && RSPEC_RERUN_MARKER=#{@filename} RSPEC_RERUN_PATTERN=spec-runs/succeeds_spec.rb rake rspec-rerun:spec`).not_to include('--tag')
     end
 
     context 'when the RSPEC_RERUN_TAG flag is set' do
       it 'scopes rspec to the tag' do
-        `cd #{root} && RSPEC_RERUN_TAG=test RSPEC_RERUN_MARKER=#{@filename} RSPEC_RERUN_PATTERN=spec-runs/succeeds_spec.rb rake rspec-rerun:spec`.should include('--tag test')
+        expect(`cd #{root} && RSPEC_RERUN_TAG=test RSPEC_RERUN_MARKER=#{@filename} RSPEC_RERUN_PATTERN=spec-runs/succeeds_spec.rb rake rspec-rerun:spec`).to include('--tag test')
       end
     end
   end
@@ -91,28 +92,28 @@ describe 'RakeTask' do
     end
 
     it 'also uses progress if there is not .rspec' do
-      run.should include '--format progress'
+      expect(run).to include '--format progress'
     end
 
     it 'also uses progress if formatter is not given' do
       File.write(dot_rspec, '--color')
-      run.should include '--format progress'
+      expect(run).to include '--format progress'
     end
 
     it 'only uses the formatter specified by the .rspec file' do
       File.write(dot_rspec, '--format documentation')
-      run.should include '--format documentation'
-      run.should_not include '--format progress'
+      expect(run).to include '--format documentation'
+      expect(run).not_to include '--format progress'
     end
 
     it 'also uses given formatter' do
       File.write(dot_rspec, "--color\n--format documentation")
-      run.should include '--format documentation'
+      expect(run).to include '--format documentation'
     end
 
     it 'also uses given formatter from home' do
       File.write(File.expand_path('~/.rspec'), "--color\n--format documentation")
-      run.should include '--format documentation'
+      expect(run).to include '--format documentation'
     end
   end
 end

@@ -2,6 +2,6 @@ require 'spec_helper'
 
 describe 'Succeeds' do
   it 'always' do
-    true.should eq true
+    expect(true).to eq true
   end
 end
