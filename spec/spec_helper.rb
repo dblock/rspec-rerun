@@ -3,10 +3,6 @@ require 'rspec-rerun'
 require 'tmpdir'
 
 RSpec.configure do |config|
-  config.expect_with :rspec do |c|
-    c.syntax = [:should, :expect]
-  end
-
   config.include(Module.new do
     def silence_stream(stream)
       old_stream = stream.dup

@@ -7,7 +7,7 @@ describe 'Fails' do
       File.delete filename
       fail
     else
-      true.should eq true
+      expect(true).to eq true
     end
   end
 end

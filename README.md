@@ -12,7 +12,7 @@ Usage
 
 Add `rspec-rerun` to `Gemfile` in the `:development` and `:test` groups.
 
-(For Rspec 2 use version '~> 0.3.1'. )
+(For RSpec 2 use version '~> 0.3.1'. )
 
 ``` ruby
 group :development, :test do
