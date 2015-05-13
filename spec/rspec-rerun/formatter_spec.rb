@@ -7,9 +7,8 @@ describe RSpec::Rerun::Formatter do
   let(:example) { RSpec::Core::ExampleGroup.describe.example 'test' }
   let(:failures_file) { RSpec::Rerun::Formatter::FILENAME }
 
-  before { FileUtils.rm(failures_file) if File.exist?(failures_file) }
-  after  { FileUtils.rm(failures_file) if File.exist?(failures_file) }
-  after { formatter.clean! }
+  before { formatter.clean! }
+  after  { formatter.clean! }
 
   describe 'example_passed' do
     it 'should not create an rspec.failures file' do
