@@ -5,26 +5,29 @@
 [![Dependency Status](https://gemnasium.com/dblock/rspec-rerun.svg)](https://gemnasium.com/dblock/rspec-rerun)
 [![Code Climate](https://codeclimate.com/github/dblock/rspec-rerun.svg)](https://codeclimate.com/github/dblock/rspec-rerun)
 
-The **rspec-rerun** gem is a drop-in solution to retry (rerun) failed RSpec examples. It may be useful, for example, with finicky Capybara tests. The strategy to rerun failed specs is to output a file called `rspec.failures` that contains a list of failed examples and to feed that file back to RSpec via `-e`.
+**rspec-rerun** reruns failed RSpec examples (for brittle tests). 
+
+It writes failed examples to the file `rspec.failures` and feeds these back to RSpec via `-e`.
 
 Usage
 -----
-
-Add `rspec-rerun` to `Gemfile` in the `:development` and `:test` groups.
-
 (For RSpec 2 use version '~> 0.3.1'. )
 
 ``` ruby
+# Gemfile
 group :development, :test do
   gem 'rspec-rerun'
 end
 ```
 
-Require `rspec-rerun/tasks` and change the default task in `Rakefile`.
-
-``` ruby
+```ruby
+# Rakefile
 require 'rspec-rerun/tasks'
-task :default => 'rspec-rerun:spec'
+task default: 'rspec-rerun:spec'
+```
+
+```bash
+echo rspec.failures >> .gitignore
 ```
 
 Run `rake` or `rake rspec-rerun:spec`. Failed examples will be rerun automatically.
@@ -42,11 +45,6 @@ You can set the following global environment variables:
 * `RSPEC_RERUN_PATTERN`: spec file pattern, defaults to the value defined by `RSpec::Core::RakeTask`
 * `RSPEC_RERUN_TAG`: only execute the tag specified
 * `RSPEC_RERUN_VERBOSE`: if 'false', don't show the rspec command invoked by Rake
-
-Git Ignore
-----------
-
-A list of failed examples is stored in a file called `rspec.failures`. It might also be a good idea that you add `rspec.failures` to `.gitignore`.
 
 History
 -------
