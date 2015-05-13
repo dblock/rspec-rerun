@@ -5,58 +5,58 @@ module RSpec
   module Rerun
     module Tasks
       class << self
-        def rspec_opts(args, spec_files = nil)
-          opts = [
+        def rspec_options(args, spec_files = nil)
+          options = [
             spec_files,
             '--require', 'rspec-rerun/formatter',
             '--format', 'RSpec::Rerun::Formatter',
-            *dot_rspec_params
+            *dot_rspec_options
           ].compact.flatten
           if args[:tag]
-            opts << '--tag'
-            opts << args[:tag]
+            options << '--tag'
+            options << args[:tag]
           end
-          opts
+          options
         end
 
         def parse_args(args)
-          opts = args.extras
+          options = args.extras
 
           # Error on multiple arguments
-          if opts.size > 1
+          if options.size > 1
             fail ArgumentError 'rspec-rerun can take an integer (retry_count) or options hash'
           else
-            opts = opts[0]
+            options = options[0]
           end
 
           # Handle if opts is just a retry_count integer
-          opts = if opts.is_a? Hash
-                   opts
-                 else
-                   { retry_count: opts }
-                 end
+          options = if options.is_a? Hash
+                      options
+                    else
+                      { retry_count: options }
+                    end
 
           # Parse environment variables
-          opts[:pattern] ||= ENV['RSPEC_RERUN_PATTERN'] if ENV['RSPEC_RERUN_PATTERN']
-          opts[:tag] ||= ENV['RSPEC_RERUN_TAG'] if ENV['RSPEC_RERUN_TAG']
-          opts[:retry_count] ||= ENV['RSPEC_RERUN_RETRY_COUNT'] if ENV['RSPEC_RERUN_RETRY_COUNT']
-          opts[:verbose] = (ENV['RSPEC_RERUN_VERBOSE'] != 'false') if opts[:verbose].nil?
+          options[:pattern] ||= ENV['RSPEC_RERUN_PATTERN'] if ENV['RSPEC_RERUN_PATTERN']
+          options[:tag] ||= ENV['RSPEC_RERUN_TAG'] if ENV['RSPEC_RERUN_TAG']
+          options[:retry_count] ||= ENV['RSPEC_RERUN_RETRY_COUNT'] if ENV['RSPEC_RERUN_RETRY_COUNT']
+          options[:verbose] = (ENV['RSPEC_RERUN_VERBOSE'] != 'false') if options[:verbose].nil?
 
-          opts
+          options
         end
 
         private
 
-        def dot_rspec_params
+        def dot_rspec_options
           dot_rspec_file = ['.rspec', File.expand_path('~/.rspec')].detect { |f| File.exist?(f) }
-          dot_rspec = if dot_rspec_file
-                        file_contents = File.read(dot_rspec_file)
-                        file_contents.split(/\n+/).map(&:shellsplit).flatten
-                      else
-                        []
-                      end
-          dot_rspec.concat ['--format', 'progress'] unless dot_rspec.include?('--format')
-          dot_rspec
+          options = if dot_rspec_file
+                      file_contents = File.read(dot_rspec_file)
+                      file_contents.split(/\n+/).map(&:shellsplit).flatten
+                    else
+                      []
+                    end
+          options.concat ['--format', 'progress'] unless options.include?('--format')
+          options
         end
       end
     end
@@ -68,7 +68,7 @@ RSpec::Core::RakeTask.new('rspec-rerun:run') do |t, args|
   t.pattern = args[:pattern] if args[:pattern]
   t.fail_on_error = false
   t.verbose = false if args[:verbose] == false
-  t.rspec_opts = RSpec::Rerun::Tasks.rspec_opts(args)
+  t.rspec_opts = RSpec::Rerun::Tasks.rspec_options(args)
 end
 
 desc 'Re-run failed RSpec examples.'
@@ -78,7 +78,7 @@ RSpec::Core::RakeTask.new('rspec-rerun:rerun') do |t, args|
   t.pattern = args[:pattern] if args[:pattern]
   t.fail_on_error = false
   t.verbose = false if args[:verbose] == false
-  t.rspec_opts =  RSpec::Rerun::Tasks.rspec_opts(args, failing_specs.join(' '))
+  t.rspec_opts =  RSpec::Rerun::Tasks.rspec_options(args, failing_specs.join(' '))
 end
 
 desc 'Run RSpec code examples.'
