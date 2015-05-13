@@ -1,5 +1,4 @@
 require 'bundler/setup'
-require 'rspec-rerun'
 require 'tmpdir'
 
 RSpec.configure do |config|

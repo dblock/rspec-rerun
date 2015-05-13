@@ -1,11 +1,11 @@
 require 'spec_helper'
 require 'stringio'
 
-describe RSpec::Rerun::Formatters::FailuresFormatter do
+describe RSpec::Rerun::Formatter do
   let(:output) { StringIO.new }
-  let(:formatter) { RSpec::Rerun::Formatters::FailuresFormatter.new(output) }
+  let(:formatter) { RSpec::Rerun::Formatter.new(output) }
   let(:example) { RSpec::Core::ExampleGroup.describe.example 'test' }
-  let(:failures_file) { RSpec::Rerun::Formatters::FailuresFormatter::FILENAME }
+  let(:failures_file) { RSpec::Rerun::Formatter::FILENAME }
 
   before { FileUtils.rm(failures_file) if File.exist?(failures_file) }
   after  { FileUtils.rm(failures_file) if File.exist?(failures_file) }

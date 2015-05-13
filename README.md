@@ -21,10 +21,10 @@ group :development, :test do
 end
 ```
 
-Require `rspec-rerun` and change the default task in `Rakefile`.
+Require `rspec-rerun/tasks` and change the default task in `Rakefile`.
 
 ``` ruby
-require 'rspec-rerun'
+require 'rspec-rerun/tasks'
 task :default => 'rspec-rerun:spec'
 ```
 
