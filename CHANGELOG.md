@@ -2,6 +2,7 @@
 ------
 
 * Your contribution here.
+* [#34](https://github.com/dblock/rspec-rerun/pull/37): Move formatter into rspec-rerun/formatter and make tasks explicity required - [@grosser](https://github.com/grosser).
 * [#33](https://github.com/dblock/rspec-rerun/pull/33): Only support RSpec 3 - [@grosser](https://github.com/grosser).
 
 0.3.1 (5/12/2015)
