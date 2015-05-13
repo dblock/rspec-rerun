@@ -8,20 +8,22 @@ module RSpec
       FILENAME = 'rspec.failures'
 
       def dump_failures
-        return if failed_examples.empty?
-        f = File.new(FILENAME, 'w+')
-        failed_examples.each do |example|
-          f.puts retry_command(example)
+        if failed_examples.empty?
+          clean!
+        else
+          rerun_commands = failed_examples.map { |e| retry_command(e) }
+          File.write(FILENAME, rerun_commands.join(''))
         end
-        f.close
-      end
-
-      def retry_command(example)
-        example.location.gsub("\"", "\\\"")
       end
 
       def clean!
         File.delete FILENAME if File.exist? FILENAME
+      end
+
+      private
+
+      def retry_command(example)
+        example.location.gsub("\"", "\\\"") + "\n"
       end
     end
   end
