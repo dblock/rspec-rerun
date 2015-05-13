@@ -17,7 +17,6 @@ Add `rspec-rerun` to `Gemfile` in the `:development` and `:test` groups.
 ``` ruby
 group :development, :test do
   gem 'rspec-rerun'
-  gem 'rspec-legacy_formatters'
 end
 ```
 
