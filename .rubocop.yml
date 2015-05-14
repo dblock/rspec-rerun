@@ -2,5 +2,26 @@ AllCops:
   Exclude:
     - vendor/**/*
 
-inherit_from: .rubocop_todo.yml
+Lint/EndAlignment:
+  AlignWith: variable
 
+Metrics/MethodLength:
+  Enabled: false
+
+Metrics/LineLength:
+  Enabled: false
+
+Metrics/AbcSize:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
+
+Metrics/PerceivedComplexity:
+  Enabled: false
+
+Metrics/CyclomaticComplexity:
+  Enabled: false
+
+Style/SpecialGlobalVars:
+  Enabled: false
