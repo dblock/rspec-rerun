@@ -31,10 +31,10 @@ module RSpec
 
           # Handle if opts is just a retry_count integer
           options = if options.is_a? Hash
-                      options
-                    else
-                      { retry_count: options }
-                    end
+            options
+          else
+            { retry_count: options }
+          end
 
           # Parse environment variables
           options[:pattern] ||= ENV['RSPEC_RERUN_PATTERN'] if ENV['RSPEC_RERUN_PATTERN']
@@ -63,11 +63,11 @@ module RSpec
         def dot_rspec_options
           dot_rspec_file = ['.rspec', File.expand_path('~/.rspec')].detect { |f| File.exist?(f) }
           options = if dot_rspec_file
-                      file_contents = File.read(dot_rspec_file)
-                      file_contents.split(/\n+/).map(&:shellsplit).flatten
-                    else
-                      []
-                    end
+            file_contents = File.read(dot_rspec_file)
+            file_contents.split(/\n+/).map(&:shellsplit).flatten
+          else
+            []
+          end
           options.concat ['--format', 'progress'] unless options.include?('--format')
           options
         end
