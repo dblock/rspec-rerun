@@ -3,6 +3,7 @@ language: ruby
 cache: bundler
 
 rvm:
+  - 2.2
   - 2.1.2
   - 2.0.0
   - 1.9.3
