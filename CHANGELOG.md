@@ -2,6 +2,7 @@
 ------
 
 * Your contribution here.
+* [#44](https://github.com/dblock/rspec-rerun/pull/44): support RSpec > 3.0 and shared example group - [@thekendalmiller](https://github.com/thekendalmiller)
 
 1.0.0 (5/13/2015)
 -----------------
