@@ -12,7 +12,7 @@ module RSpec
           clean!
         else
           rerun_commands = failed_examples.map { |e| retry_command(e) }
-          File.write(FILENAME, rerun_commands.join(''))
+          File.write(FILENAME, rerun_commands.join("\n"))
         end
       end
 
@@ -23,7 +23,11 @@ module RSpec
       private
 
       def retry_command(example)
-        example.location.gsub("\"", "\\\"") + "\n"
+        if example.respond_to?(:rerun_argument)
+          example.rerun_argument
+        else
+          example.location.gsub("\"", "\\\"")
+        end
       end
     end
   end

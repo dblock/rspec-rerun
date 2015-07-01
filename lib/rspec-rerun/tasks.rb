@@ -49,13 +49,20 @@ module RSpec
           File.read(RSpec::Rerun::Formatter::FILENAME).split
         end
 
+        def failed_count
+          failing_specs.count
+        end
+
         def failure_message
-          failed_count = failing_specs.count
           "[#{Time.now}] Failed, #{failed_count} failure#{failed_count == 1 ? '' : 's'}"
         end
 
-        def rerun(args)
+        def run(args)
           Rake::Task['rspec-rerun:run'].execute(args)
+        end
+
+        def rerun(args)
+          Rake::Task['rspec-rerun:rerun'].execute(args)
         end
 
         private
@@ -88,7 +95,7 @@ desc 'Re-run failed RSpec examples.'
 RSpec::Core::RakeTask.new('rspec-rerun:rerun') do |t, args|
   failing_specs = RSpec::Rerun::Tasks.failing_specs
 
-  t.pattern = args[:pattern] if args[:pattern]
+  t.pattern = 'deliberately-left-blank'
   t.fail_on_error = false
   t.verbose = false if args[:verbose] == false
   t.rspec_opts =  RSpec::Rerun::Tasks.rspec_options(args, failing_specs.join(' '))
@@ -101,7 +108,7 @@ task 'rspec-rerun:spec' do |_t, args|
 
   fail 'retry count must be >= 1' if retry_count <= 0
   FileUtils.rm_f RSpec::Rerun::Formatter::FILENAME
-  RSpec::Rerun::Tasks.rerun(parsed_args)
+  RSpec::Rerun::Tasks.run(parsed_args)
 
   until $?.success? || retry_count == 0
     retry_count -= 1
@@ -113,6 +120,7 @@ task 'rspec-rerun:spec' do |_t, args|
 
   unless $?.success?
     $stderr.puts RSpec::Rerun::Tasks.failure_message
+    failed_count = RSpec::Rerun::Tasks.failed_count
     fail "#{failed_count} failure#{failed_count == 1 ? '' : 's'}"
   end
 end

@@ -1,5 +1,6 @@
 require 'spec_helper'
 require 'stringio'
+require 'rspec-rerun/formatter'
 
 describe RSpec::Rerun::Formatter do
   let(:output) { StringIO.new }

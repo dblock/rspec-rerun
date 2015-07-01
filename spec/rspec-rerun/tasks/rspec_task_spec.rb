@@ -116,4 +116,12 @@ describe 'RakeTask' do
       expect(run).to include '--format documentation'
     end
   end
+
+  context 'ignoring pattern during rerun' do
+    let(:run) { `cd #{root} && RSPEC_RERUN_MARKER=#{@filename} RSPEC_RERUN_PATTERN=spec-runs/fails_twice_spec.rb rake rspec-rerun:spec 2>&1` }
+
+    it 'also uses progress if there is not .rspec' do
+      expect(run).to include '--pattern deliberately-left-blank'
+    end
+  end
 end
