@@ -16,4 +16,8 @@ RSpec.configure do |config|
       fail "failed with exit code #{$?.exitstatus}" unless system(cmd)
     end
   end)
+  config.before :all do
+    require 'rspec/version'
+    puts "Using RSpec #{RSpec::Version::STRING}"
+  end
 end

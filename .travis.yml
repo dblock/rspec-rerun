@@ -5,7 +5,6 @@ cache: bundler
 rvm:
   - 2.2
   - 2.1.2
-  - 2.0.0
   - 1.9.3
   - rbx-2.2.10
   - jruby-19mode
@@ -13,6 +12,36 @@ rvm:
   - jruby-head
 
 matrix:
+  exclude:
+    - rvm: 1.9.3
+      env: RSPEC_VERSION=3.1.0
+    - rvm: 1.9.3
+      env: RSPEC_VERSION=3.2.0
+    - rvm: 2.1.2
+      env: RSPEC_VERSION=3.1.0
+    - rvm: 2.1.2
+      env: RSPEC_VERSION=3.2.0
+    - rvm: rbx-2.2.10
+      env: RSPEC_VERSION=3.1.0
+    - rvm: rbx-2.2.10
+      env: RSPEC_VERSION=3.2.0
+    - rvm: jruby-19mode
+      env: RSPEC_VERSION=3.1.0
+    - rvm: jruby-19mode
+      env: RSPEC_VERSION=3.2.0
+    - rvm: ruby-head
+      env: RSPEC_VERSION=3.1.0
+    - rvm: ruby-head
+      env: RSPEC_VERSION=3.2.0
+    - rvm: jruby-head
+      env: RSPEC_VERSION=3.1.0
+    - rvm: jruby-head
+      env: RSPEC_VERSION=3.2.0
   allow_failures:
     - rvm: ruby-head
     - rvm: jruby-head
+
+env:
+  - RSPEC_VERSION=3.1.0
+  - RSPEC_VERSION=3.2.0
+  - RSPEC_VERSION=LATEST
