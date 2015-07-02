@@ -2,8 +2,12 @@
 ------
 
 * Your contribution here.
-* [#46](https://github.com/dblock/rspec-rerun/pull/46): remove rspec-legacy_formatters to fix output with rspec-core 3.3 - [@thekendalmiller](https://github.com/thekendalmiller)
-* [#44](https://github.com/dblock/rspec-rerun/pull/44): support RSpec > 3.0 and shared example group - [@thekendalmiller](https://github.com/thekendalmiller)
+
+1.1.0 (7/02/2015)
+-----------------
+* Test against multiple RSpec 3 versions - [@dblock](https://github.com/dblock).
+* [#46](https://github.com/dblock/rspec-rerun/pull/46): remove rspec-legacy_formatters to fix output with rspec-core 3.3 - [@thekendalmiller](https://github.com/thekendalmiller).
+* [#44](https://github.com/dblock/rspec-rerun/pull/44): support RSpec > 3.0 and shared example group - [@thekendalmiller](https://github.com/thekendalmiller).
 
 1.0.0 (5/13/2015)
 -----------------
