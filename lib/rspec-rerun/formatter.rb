@@ -1,17 +1,20 @@
 require 'rspec/core'
-require 'rspec/legacy_formatters'
-require 'rspec/core/formatters/base_formatter'
+require 'rspec/core/formatters'
 
 module RSpec
   module Rerun
-    class Formatter < RSpec::Core::Formatters::BaseFormatter
+    class Formatter
+      ::RSpec::Core::Formatters.register self, :dump_failures
+
       FILENAME = 'rspec.failures'
 
-      def dump_failures
-        if failed_examples.empty?
+      def initialize(_); end
+
+      def dump_failures(notification)
+        if notification.failed_examples.empty?
           clean!
         else
-          rerun_commands = failed_examples.map { |e| retry_command(e) }
+          rerun_commands = notification.failed_examples.map { |e| retry_command(e) }
           File.write(FILENAME, rerun_commands.join("\n"))
         end
       end
