@@ -5,7 +5,8 @@ require 'rspec-rerun/formatter'
 describe RSpec::Rerun::Formatter do
   let(:output) { StringIO.new }
   let(:formatter) { RSpec::Rerun::Formatter.new(output) }
-  let(:example) { RSpec::Core::ExampleGroup.describe.example 'test' }
+  let(:example) { double('example', location: 'some/path.rb') }
+  let(:examples_notification) { double('examples_notification', failed_examples: []) }
   let(:failures_file) { RSpec::Rerun::Formatter::FILENAME }
 
   before { formatter.clean! }
@@ -13,23 +14,22 @@ describe RSpec::Rerun::Formatter do
 
   describe 'example_passed' do
     it 'should not create an rspec.failures file' do
-      formatter.example_passed(example)
-      formatter.dump_failures
+      formatter.dump_failures(examples_notification)
       expect(File.exist?(failures_file)).to eq false
     end
   end
 
   describe 'example_failed' do
     it 'should create an rspec.failures file' do
-      formatter.example_failed(example)
-      formatter.dump_failures
+      allow(examples_notification).to receive(:failed_examples) { [example] }
+      formatter.dump_failures(examples_notification)
       expect(File.exist?(failures_file)).to eq true
       expect(File.read(failures_file).strip).to eq example.location
     end
 
     it 'should create one line per failed example' do
-      2.times { formatter.example_failed(example) }
-      formatter.dump_failures
+      allow(examples_notification).to receive(:failed_examples) { [example, example] }
+      formatter.dump_failures(examples_notification)
       expect(File.exist?(failures_file)).to eq true
       expect(File.read(failures_file).split("\n")).to eq [example.location, example.location]
     end
