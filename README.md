@@ -37,7 +37,10 @@ Parameters
 
 The `rspec-rerun:spec` task accepts the following parameters:
 
-* `retry_count`: number of retries, defaults to 1, also available by setting
+* `retry_count`: number of retries, defaults to 1
+
+e.g. `rake rspec-rerun:spec[3]`. ZSH users will want to try noglob or quote around the task name: `rake 'rspec-rerun:spec[3]'`.
+
 
 You can set the following global environment variables:
 
