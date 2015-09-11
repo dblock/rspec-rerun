@@ -48,6 +48,7 @@ You can set the following global environment variables:
 * `RSPEC_RERUN_PATTERN`: spec file pattern, defaults to the value defined by `RSpec::Core::RakeTask`
 * `RSPEC_RERUN_TAG`: only execute the tag specified
 * `RSPEC_RERUN_VERBOSE`: if 'false', don't show the rspec command invoked by Rake
+* `RSPEC_FAILURE_FILE`: if set, override default './rspec.failures' filename
 
 History
 -------

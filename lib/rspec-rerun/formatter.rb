@@ -6,7 +6,7 @@ module RSpec
     class Formatter
       ::RSpec::Core::Formatters.register self, :dump_failures
 
-      FILENAME = 'rspec.failures'
+      FILENAME = ENV['RSPEC_FAILURE_FILE'] || 'rspec.failures'
 
       def initialize(_); end
 
