@@ -15,7 +15,9 @@ module RSpec
           clean!
         else
           rerun_commands = notification.failed_examples.map { |e| retry_command(e) }
-          File.write(FILENAME, rerun_commands.join("\n"))
+          rerun_commands_split = rerun_commands.map {|item| item.split(":")[0]}
+          rerun_commands_split = rerun_commands_split.uniq
+          File.write(FILENAME, rerun_commands_split.join("\n"))
         end
       end
 
