@@ -26,10 +26,10 @@ module RSpec
         def parse_args(args)
           options = args.extras
 
-          # # Error on multiple arguments
-          if options.size < 1
-            fail ArgumentError 'Provide required arguments: :retry_count and :pattern. Also you can provide optional arguemnts: :format_junit, :out_junit, :format_html, :out_html'
-          end
+          # # # Error on multiple arguments
+          # if options.size < 1
+          #   fail ArgumentError 'Provide required arguments: :retry_count and :pattern. Also you can provide optional arguemnts: :format_junit, :out_junit, :format_html, :out_html'
+          # end
 
           # Handle if opts is just a retry_count integer
           options = if options.is_a? Hash
