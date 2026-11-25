@@ -91,19 +91,26 @@ describe 'RakeTask' do
       end
     end
 
-    it 'also uses progress if there is not .rspec' do
-      expect(run).to include '--format progress'
+    it 'does not pass a formatter if there is no .rspec' do
+      expect(run).not_to include '--format'
+      expect(run).to include 'Failed, 1 failure'
     end
 
-    it 'also uses progress if formatter is not given' do
+    it 'does not pass a formatter if .rspec does not give one' do
       File.write(dot_rspec, '--color')
-      expect(run).to include '--format progress'
+      expect(run).not_to include '--format'
     end
 
     it 'only uses the formatter specified by the .rspec file' do
       File.write(dot_rspec, '--format documentation')
       expect(run).to include '--format documentation'
       expect(run).not_to include '--format progress'
+    end
+
+    it 'honors a default formatter set in RSpec.configure' do
+      result = `cd #{root} && RSPEC_RERUN_MARKER=#{@filename} RSPEC_RERUN_PATTERN=spec-runs/fails_once_spec.rb SPEC_OPTS="--require ./spec-runs/support/default_formatter" rake rspec-rerun:spec 2>&1`
+      expect($?).to be_success
+      expect(result).to include 'once (FAILED - 1)'
     end
 
     it 'also uses given formatter' do
@@ -114,6 +121,15 @@ describe 'RakeTask' do
     it 'also uses given formatter from home' do
       File.write(File.expand_path('~/.rspec'), "--color\n--format documentation")
       expect(run).to include '--format documentation'
+    end
+  end
+
+  context 'formatters in SPEC_OPTS' do
+    it 'retries a spec failure' do
+      result = `cd #{root} && RSPEC_RERUN_MARKER=#{@filename} RSPEC_RERUN_PATTERN=spec-runs/fails_once_spec.rb SPEC_OPTS="--format documentation" rake rspec-rerun:spec 2>&1`
+      expect($?).to be_success
+      expect(result).to include 'once (FAILED - 1)'
+      expect(result).to include '1 example, 0 failures'
     end
   end
 

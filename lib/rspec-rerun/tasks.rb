@@ -8,8 +8,7 @@ module RSpec
         def rspec_options(args, spec_files = nil)
           options = [
             spec_files,
-            '--require', 'rspec-rerun/formatter',
-            '--format', 'RSpec::Rerun::Formatter',
+            '--require', 'rspec-rerun/register',
             *dot_rspec_options
           ].compact.flatten
           if args[:tag]
@@ -69,14 +68,12 @@ module RSpec
 
         def dot_rspec_options
           dot_rspec_file = ['.rspec', File.expand_path('~/.rspec')].detect { |f| File.exist?(f) }
-          options = if dot_rspec_file
+          if dot_rspec_file
             file_contents = File.read(dot_rspec_file)
             file_contents.split(/\n+/).map(&:shellsplit).flatten
           else
             []
           end
-          options.concat ['--format', 'progress'] unless options.include?('--format')
-          options
         end
       end
     end
