@@ -48,6 +48,15 @@ module RSpec
           File.read(RSpec::Rerun::Formatter::FILENAME).split
         end
 
+        def check_failures_recorded!(exit_status)
+          return if File.exist?(RSpec::Rerun::Formatter::FILENAME)
+
+          fail "RSpec failed with exit code #{exit_status} without recording failed examples in " \
+               "#{RSpec::Rerun::Formatter::FILENAME}, so there is nothing to re-run. This happens when RSpec fails " \
+               'outside of examples, for example on a load error or when an at_exit hook, such as a SimpleCov ' \
+               'minimum coverage check, changes the exit code.'
+        end
+
         def failed_count
           failing_specs.count
         end
@@ -108,6 +117,7 @@ task 'rspec-rerun:spec' do |_t, args|
   RSpec::Rerun::Tasks.run(parsed_args)
 
   until $?.success? || retry_count == 0
+    RSpec::Rerun::Tasks.check_failures_recorded!($?.exitstatus)
     retry_count -= 1
     msg = RSpec::Rerun::Tasks.failure_message
     msg += ", re-running, #{retry_count} #{retry_count == 1 ? 'retry' : 'retries'} left" if retry_count > 0
@@ -116,6 +126,7 @@ task 'rspec-rerun:spec' do |_t, args|
   end
 
   unless $?.success?
+    RSpec::Rerun::Tasks.check_failures_recorded!($?.exitstatus)
     $stderr.puts RSpec::Rerun::Tasks.failure_message
     failed_count = RSpec::Rerun::Tasks.failed_count
     fail "#{failed_count} failure#{failed_count == 1 ? '' : 's'}"

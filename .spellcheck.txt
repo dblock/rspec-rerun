@@ -5,7 +5,9 @@ CHANGELOG
 dblock
 dev
 Doubrovkine
+ENOENT
 errm
+Errno
 formatter
 formatters
 Formatter
@@ -34,6 +36,7 @@ RSpecRerunRelease
 rubocop
 RuboCop
 RubyGems
+SimpleCov
 sublicense
 thekendalmiller
 TylerRick
