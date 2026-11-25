@@ -3,7 +3,7 @@ Releasing RSpec-Rerun
 
 ### Prepare
 
-Make sure tests are green on [Travis CI](https://travis-ci.org/dblock/rspec-rerun).
+Make sure tests are green on [GitHub Actions](https://github.com/dblock/rspec-rerun/actions).
 
 ```
 rake bump:minor # to release major features or breaking API changes

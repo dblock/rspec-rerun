@@ -1,0 +1,32 @@
+name: Test
+
+on: [push, pull_request]
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: Ruby ${{ matrix.entry.ruby }} / RSpec ${{ matrix.entry.rspec }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        entry:
+          - { ruby: '2.7', rspec: '~> 3.4.0' }
+          - { ruby: '3.3', rspec: 'LATEST' }
+          - { ruby: '3.4', rspec: 'LATEST' }
+          - { ruby: '4.0', rspec: 'LATEST' }
+          - { ruby: 'jruby', rspec: 'LATEST' }
+    env:
+      RSPEC_VERSION: ${{ matrix.entry.rspec }}
+    steps:
+      - name: Check Out Code
+        uses: actions/checkout@v7
+      - name: Set Up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.entry.ruby }}
+          bundler-cache: true
+      - name: Run Tests
+        run: bundle exec rake
