@@ -4,7 +4,10 @@ require 'rspec-rerun/tasks'
 require 'bump/tasks'
 require 'rspec/core/rake_task'
 
-require 'rubocop/rake_task'
-RuboCop::RakeTask.new
+lint = Gem.loaded_specs.key?('rubocop')
+if lint
+  require 'rubocop/rake_task'
+  RuboCop::RakeTask.new
+end
 
-task default: [:rubocop, 'rspec-rerun:spec']
+task default: lint ? [:rubocop, 'rspec-rerun:spec'] : ['rspec-rerun:spec']

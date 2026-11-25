@@ -1,9 +1,7 @@
 ![rspec-rerun](https://raw.github.com/dblock/rspec-rerun/master/rspec-rerun.png)
 
 [![Gem Version](http://img.shields.io/gem/v/rspec-rerun.svg)](http://badge.fury.io/rb/rspec-rerun)
-[![Build Status](http://img.shields.io/travis/dblock/rspec-rerun.svg)](https://travis-ci.org/dblock/rspec-rerun)
-[![Dependency Status](https://gemnasium.com/dblock/rspec-rerun.svg)](https://gemnasium.com/dblock/rspec-rerun)
-[![Code Climate](https://codeclimate.com/github/dblock/rspec-rerun.svg)](https://codeclimate.com/github/dblock/rspec-rerun)
+[![Test](https://github.com/dblock/rspec-rerun/actions/workflows/test.yml/badge.svg?branch=master)](https://github.com/dblock/rspec-rerun/actions/workflows/test.yml)
 
 **rspec-rerun** reruns failed RSpec examples (for brittle tests). 
 

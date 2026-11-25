@@ -1,14 +1,19 @@
+inherit_from: .rubocop_todo.yml
+
 AllCops:
+  NewCops: enable
+  SuggestExtensions: false
   Exclude:
+    - pkg/**/*
     - vendor/**/*
 
-Lint/EndAlignment:
-  AlignWith: variable
+Layout/EndAlignment:
+  EnforcedStyleAlignWith: variable
 
 Metrics/MethodLength:
   Enabled: false
 
-Metrics/LineLength:
+Layout/LineLength:
   Enabled: false
 
 Metrics/AbcSize:
