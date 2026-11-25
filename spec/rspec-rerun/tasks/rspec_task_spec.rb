@@ -124,6 +124,16 @@ describe 'RakeTask' do
     end
   end
 
+  context 'failures outside of examples' do
+    it 'fails without re-running and explains why' do
+      result = `cd #{root} && RSPEC_RERUN_MARKER=#{@filename} RSPEC_RERUN_PATTERN=spec-runs/fails_outside_examples_spec.rb rake rspec-rerun:spec 2>&1`
+      expect($?).not_to be_success
+      expect(result).to include 'without recording failed examples in rspec.failures, so there is nothing to re-run'
+      expect(result).not_to include 'deliberately-left-blank'
+      expect(result).not_to include 'Errno::ENOENT'
+    end
+  end
+
   context 'formatters in SPEC_OPTS' do
     it 'retries a spec failure' do
       result = `cd #{root} && RSPEC_RERUN_MARKER=#{@filename} RSPEC_RERUN_PATTERN=spec-runs/fails_once_spec.rb SPEC_OPTS="--format documentation" rake rspec-rerun:spec 2>&1`
