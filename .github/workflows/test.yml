@@ -1,6 +1,13 @@
 name: Test
 
-on: [push, pull_request]
+on:
+  push:
+    branches: [master]
+  pull_request:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 permissions:
   contents: read
@@ -9,6 +16,7 @@ jobs:
   test:
     name: Ruby ${{ matrix.entry.ruby }} / RSpec ${{ matrix.entry.rspec }}
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     strategy:
       fail-fast: false
       matrix:
@@ -29,4 +37,4 @@ jobs:
           ruby-version: ${{ matrix.entry.ruby }}
           bundler-cache: true
       - name: Run Tests
-        run: bundle exec rake
+        run: bundle exec rake rspec-rerun:spec
