@@ -60,7 +60,6 @@ Lint/NonAtomicFileOperation:
 # AllowedMethods: refine
 Metrics/BlockLength:
   Exclude:
-    - '**/*.gemspec'
     - 'spec/rspec-rerun/formatter_spec.rb'
     - 'spec/rspec-rerun/tasks/rspec_task_spec.rb'
 
@@ -98,7 +97,6 @@ Style/FileWrite:
 # SupportedStyles: always, always_true, never
 Style/FrozenStringLiteralComment:
   Exclude:
-    - '**/*.arb'
     - 'Gemfile'
     - 'Rakefile'
     - 'lib/rspec-rerun/formatter.rb'
@@ -124,11 +122,6 @@ Style/GuardClause:
   Exclude:
     - 'lib/rspec-rerun/tasks.rb'
 
-# This cop supports safe autocorrection (--autocorrect).
-Style/IfUnlessModifier:
-  Exclude:
-    - 'Gemfile'
-
 # This cop supports unsafe autocorrection (--autocorrect-all).
 # Configuration parameters: EnforcedStyle, Recursive.
 # SupportedStyles: literals, strict
@@ -142,7 +135,6 @@ Style/MutableConstant:
 # SupportedStyles: predicate, comparison
 Style/NumericPredicate:
   Exclude:
-    - 'spec/**/*'
     - 'lib/rspec-rerun/tasks.rb'
 
 # This cop supports safe autocorrection (--autocorrect).
