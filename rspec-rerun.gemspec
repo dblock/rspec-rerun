@@ -1,4 +1,4 @@
-require './lib/rspec-rerun/version'
+require_relative 'lib/rspec-rerun/version'
 
 Gem::Specification.new do |s|
   s.name = 'rspec-rerun'
@@ -14,5 +14,4 @@ Gem::Specification.new do |s|
 
   s.add_development_dependency 'rake'
   s.add_development_dependency 'bundler'
-  s.add_development_dependency 'bump'
 end

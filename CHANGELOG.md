@@ -1,10 +1,11 @@
 # Changelog
 
-## (Next)
+## 1.1.1 (Next)
 
 * [#53](https://github.com/dblock/rspec-rerun/pull/53): Replace Travis CI with GitHub Actions, test on Ruby 2.7 through 4.0 and JRuby, and upgrade RuboCop to 1.92 - [@dblock](https://github.com/dblock).
 * [#54](https://github.com/dblock/rspec-rerun/pull/54): Lint Markdown, YAML, and spelling with rubocop-md, rubocop-prose, rubocop-spellcheck, and rubocop-yaml in a separate Lint workflow, and clean up documentation - [@dblock](https://github.com/dblock).
 * [#55](https://github.com/dblock/rspec-rerun/pull/55): Run CI pushes only on the default branch, cancel superseded pull request runs, skip duplicate lint in the test matrix, and bound job times - [@dblock](https://github.com/dblock).
+* [#57](https://github.com/dblock/rspec-rerun/pull/57): Release with ruby-gem-release through a manually dispatched GitHub Actions workflow and RubyGems Trusted Publishing - [@dblock](https://github.com/dblock).
 * Your contribution here.
 
 ## 1.1.0 (7/02/2015)

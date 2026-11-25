@@ -156,3 +156,11 @@ Markdown/FenceLanguage:
     - Exclude
   Exclude:
   - CHANGELOG.md
+
+# The release spec runs a release in a fixture and verifies the tag, the next development commit, and their files together.
+Metrics/BlockLength:
+  inherit_mode:
+    merge:
+    - Exclude
+  Exclude:
+  - spec/release/release_spec.rb

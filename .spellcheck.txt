@@ -29,8 +29,10 @@ rebase
 Rebase
 rspec
 RSpec
+RSpecRerunRelease
 rubocop
 RuboCop
+RubyGems
 sublicense
 thekendalmiller
 TylerRick
