@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.2.1 (Next)
+
+* Your contribution here.
+
 ## 1.2.0 (2026/11/25)
 
 * [#53](https://github.com/dblock/rspec-rerun/pull/53): Replace Travis CI with GitHub Actions, test on Ruby 2.7 through 4.0 and JRuby, and upgrade RuboCop to 1.92 - [@dblock](https://github.com/dblock).
